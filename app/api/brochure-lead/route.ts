@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
 //const MANAGER_EMAIL = "manager.manorview@lasohealthcare.co.uk"
-const MANAGER_EMAIL = "henry.ambrose@visicardia.com"
+const MANAGER_EMAIL = "henryambrose@gmail.com"
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: Request) {
