@@ -3,6 +3,8 @@ import { Hero } from "@/components/hero"
 import { AwardMarquee } from "@/components/award-marquee"
 import { Locations } from "@/components/locations"
 import { Testimonials } from "@/components/testimonials"
+import { Gallery } from "@/components/gallery"
+import { Contact } from "@/components/contact"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 
 export default function Page() {
@@ -13,6 +15,8 @@ export default function Page() {
       <AwardMarquee />
       <Locations />
       <Testimonials />
+      <Gallery />
+      <Contact />
       <footer className="border-t border-border bg-background py-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-muted-foreground md:flex-row">
           <Image

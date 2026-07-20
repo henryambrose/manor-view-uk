@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { BrochureDownload } from "@/components/brochure-download"
 
 export function Hero() {
   return (
@@ -26,13 +27,13 @@ export function Hero() {
       </div>
 
       {/* Top bar */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-7">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
         <Image
           src="/images/manor-view-logo.jpg"
           alt="Manor View Care Home"
-          width={240}
-          height={48}
-          className="h-12 w-auto object-contain"
+          width={200}
+          height={40}
+          className="h-10 w-auto object-contain"
           priority
         />
         <nav className="hidden items-center gap-8 text-sm text-white/90 md:flex">
@@ -49,6 +50,7 @@ export function Hero() {
         <Button
           size="sm"
           className="rounded-full bg-white text-primary hover:bg-white/90"
+          render={<a href="mailto:manager.manorview@lasohealthcare.co.uk" />}
         >
           Book a visit
         </Button>
@@ -56,31 +58,19 @@ export function Hero() {
 
       {/* Headline */}
       <div className="mx-auto flex w-full max-w-6xl flex-col justify-end px-6 pb-20 pt-32 md:pt-56">
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-white/85">
+        <p className="mb-4 text-base font-semibold uppercase tracking-[0.15em] text-white md:text-lg">
           Residential &amp; Nursing Care
         </p>
         <h1 className="max-w-3xl text-balance font-serif text-4xl font-medium leading-[1.05] text-white md:text-6xl lg:text-7xl">
           A warmer way to care for the people who cared for us.
         </h1>
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/90 md:text-lg">
-          Beautiful homes, familiar comforts, and a team that treats every
-          resident like family. Discover care your loved ones will be glad to
-          call home.
+          Beautiful environment, warming gardens, familiar comforts, and a
+          team that treats every resident like family. Discover care your
+          loved ones will be glad to call home.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
-          <Button
-            size="lg"
-            className="rounded-full bg-white px-7 text-primary hover:bg-white/90"
-          >
-            Find a home near you
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full border-white/40 bg-white/10 px-7 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
-          >
-            Download our brochure
-          </Button>
+          <BrochureDownload />
         </div>
       </div>
     </section>
