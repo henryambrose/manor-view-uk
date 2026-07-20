@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
-const BROCHURE_URL = "/brochure.pdf"
+const BROCHURE_URL = encodeURI("/Manor View Care Home Brochure.pdf")
 
 /**
  * Email-gated brochure download. There's no backend/CMS in this project,
