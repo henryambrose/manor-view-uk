@@ -6,19 +6,35 @@ import { Button } from "@/components/ui/button"
 const BROCHURE_URL = encodeURI("/Manor View Care Home Brochure.pdf")
 
 /**
- * Email-gated brochure download. There's no backend/CMS in this project,
- * so the email is only used client-side to unlock the download link - it
- * isn't sent or stored anywhere. Wire this up to a real capture endpoint
- * (Formspree, Mailchimp, a serverless function, etc.) when one is chosen.
+ * Email-gated brochure download. Submits the email to /api/brochure-lead,
+ * which forwards it to the manager's inbox via Resend (see that route for
+ * the RESEND_API_KEY / BROCHURE_LEAD_FROM_EMAIL env vars it needs). The
+ * download unlocks either way so a delivery hiccup doesn't block access
+ * to the brochure itself.
  */
 export function BrochureDownload() {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState("")
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle")
+  const [error, setError] = useState<string | null>(null)
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitted(true)
+    setStatus("submitting")
+    setError(null)
+
+    try {
+      const res = await fetch("/api/brochure-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+      if (!res.ok) throw new Error("Request failed")
+    } catch {
+      setError("Couldn't notify the team, but here's your brochure anyway.")
+    }
+
+    setStatus("done")
   }
 
   if (!open) {
@@ -34,10 +50,12 @@ export function BrochureDownload() {
     )
   }
 
-  if (submitted) {
+  if (status === "done") {
     return (
       <div className="flex flex-wrap items-center gap-3 rounded-full border border-white/40 bg-white/10 px-5 py-2 text-white backdrop-blur-sm">
-        <span className="text-sm">Thanks — your download is ready.</span>
+        <span className="text-sm">
+          {error ?? "Thanks — your download is ready."}
+        </span>
         <Button
           size="sm"
           className="rounded-full bg-white text-primary hover:bg-white/90"
@@ -66,9 +84,10 @@ export function BrochureDownload() {
       <Button
         size="sm"
         type="submit"
+        disabled={status === "submitting"}
         className="rounded-full bg-white text-primary hover:bg-white/90"
       >
-        Get brochure
+        {status === "submitting" ? "Sending…" : "Get brochure"}
       </Button>
     </form>
   )
