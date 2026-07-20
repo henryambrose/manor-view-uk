@@ -42,6 +42,7 @@ export function BrochureDownload() {
           size="sm"
           className="rounded-full bg-white text-primary hover:bg-white/90"
           render={<a href={BROCHURE_URL} download />}
+          nativeButton={false}
         >
           Download PDF
         </Button>

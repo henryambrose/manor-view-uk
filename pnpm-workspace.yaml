@@ -1,3 +1,8 @@
-allowBuilds:
-  msw: set this to true or false
-  sharp: set this to true or false
+overrides:
+  hono: 4.12.25
+
+# sharp: optional next/image build for the optimization pipeline, which
+# next.config.mjs disables (images.unoptimized). msw: pulled in by the
+# shadcn CLI dev tool, not used at runtime. Neither needs its native
+# build script for this project.
+onlyBuiltDependencies: []

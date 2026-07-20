@@ -51,6 +51,7 @@ export function Hero() {
           size="sm"
           className="rounded-full bg-white text-primary hover:bg-white/90"
           render={<a href="mailto:manager.manorview@lasohealthcare.co.uk" />}
+          nativeButton={false}
         >
           Book a visit
         </Button>
